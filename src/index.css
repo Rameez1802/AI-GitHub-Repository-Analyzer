@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-mist: #eef1f6;
+  --color-ink: #0e1a2b;
+  --color-muted: #5b6b82;
+  --color-line: #dde3ec;
+
+  --color-brand-50: #eef0ff;
+  --color-brand-100: #e0e3ff;
+  --color-brand-200: #c2c8ff;
+  --color-brand-300: #9aa2ff;
+  --color-brand-400: #6c72fb;
+  --color-brand-500: #4a4cf2;
+  --color-brand-600: #3b3ee0;
+  --color-brand-700: #2f31b8;
+  --color-brand-800: #262892;
+  --color-brand-900: #1d1f6b;
+
+  /* Diff-style status colours used for scores and signals */
+  --color-added: #1f9d6b;
+  --color-removed: #e2475b;
+  --color-changed: #c9811a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-brand-200);
+  }
+}
+
+/* One orchestrated moment: the hero commit-grid fades in cell by cell. */
+@keyframes cell-in {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cell-in {
+  opacity: 0;
+  animation: cell-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ring-progress {
+  transition: stroke-dashoffset 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e6eaf1 25%, #f3f5f9 50%, #e6eaf1 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cell-in { animation: none; opacity: 1; }
+  .ring-progress { transition: none; }
+  .skeleton { animation: none; }
+}
+
+@media print {
+  header, footer, nav { display: none !important; }
+  body { background: #fff; }
+  details > *:not(summary) { display: block; }
+  section, li { break-inside: avoid; }
+}
