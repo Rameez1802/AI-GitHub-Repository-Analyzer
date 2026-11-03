@@ -26,7 +26,6 @@ export default function ServerStatus() {
     <div className="mt-5 flex max-w-xl flex-wrap gap-2" aria-label="Server status">
       {pill(true, 'Server online')}
       {pill(health.github.tokenConfigured, health.github.tokenConfigured ? 'GitHub token set' : 'No GitHub token: 60 requests per hour')}
-      {pill(health.llm.configured, health.llm.configured ? `Model: ${health.llm.model}` : 'No language model: extractive answers')}
     </div>
   );
 }
