@@ -40,7 +40,7 @@ export default function RepoForm() {
                 setValue(e.target.value);
                 if (error) setError('');
               }}
-              placeholder="facebook/react or a GitHub link"
+              placeholder="Paste a GitHub link"
               aria-invalid={Boolean(error)}
               aria-describedby={error ? 'repo-error' : undefined}
               className="h-12 w-full bg-transparent text-base outline-none placeholder:text-muted/70"
